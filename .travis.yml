@@ -13,13 +13,7 @@ before_install:
   - docker pull amarschke/flycheck-ci-docker
 
 script:
-  - docker run --rm \
-               --volume $TRAVIS_BUILD_DIR:/home/flycheck-tester/flycheck \
-               --name "FlycheckTesting" \
-               --workdir /home/flycheck-tester/flycheck \
-               --entrypoint "/bin/bash" \
-               -it amarschke/flycheck-ci-docker \
-               /bin/bash -c ". ~/.bash_profile && make init check compile specs unit integ"
+  - docker run --volume $TRAVIS_BUILD_DIR:/home/flycheck-tester/flycheck --workdir /home/flycheck-tester/flycheck --entrypoint "/bin/bash" -it amarschke/flycheck-ci-docker /bin/bash -c ". ~/.bash_profile && make init check compile specs unit integ"
 
 notifications:
   webhooks:
